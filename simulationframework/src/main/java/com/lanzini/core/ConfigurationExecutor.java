@@ -2,7 +2,7 @@ package com.lanzini.core;
 
 /**
  * A configurator for the execution of simulation
- * @param <T> - the type of element in Configuration Executor
+ * @param <T> the type of element in Configuration Executor
  */
 @FunctionalInterface
 public interface ConfigurationExecutor<T> {

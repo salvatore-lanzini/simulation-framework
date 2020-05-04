@@ -25,8 +25,8 @@ public class SimulatorFlowBuilder {
 
     /**
      * Set the messageFactory of flow builder
-     * @param messageFactory - the messageFactory of flow builder
-     * @param <T> - the type of the message
+     * @param messageFactory the messageFactory of flow builder
+     * @param <T> the type of the message
      * @return the instance of flow builder
      */
     public <T> SimulatorFlowBuilder message(MessageFactory<T> messageFactory){
@@ -36,8 +36,8 @@ public class SimulatorFlowBuilder {
 
     /**
      * Set the publisher of flow builder
-     * @param publisher -  the publisher of flow builder
-     * @param <T> -  the type of the simulation
+     * @param publisher the publisher of flow builder
+     * @param <T> the type of the simulation
      * @return the instance of flow builder
      */
     public <T> SimulatorFlowBuilder publish(Publisher<T> publisher){
@@ -47,8 +47,8 @@ public class SimulatorFlowBuilder {
 
     /**
      * Set the configurationExecutor of flow builder
-     * @param configurationExecutor -  the configurationExecutor of flow builder
-     * @param <T> - the type of the simulation
+     * @param configurationExecutor the configurationExecutor of flow builder
+     * @param <T> the type of the simulation
      * @return the instance of flow builder
      */
     public <T> SimulatorFlowBuilder configure(ConfigurationExecutor<T> configurationExecutor){

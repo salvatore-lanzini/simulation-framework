@@ -2,7 +2,7 @@ package com.lanzini.core;
 
 /**
  * Define the way to publish the message
- * @param <T> - the type of the message to publish
+ * @param <T> the type of the message to publish
  */
 @FunctionalInterface
 public interface Publisher<T> {

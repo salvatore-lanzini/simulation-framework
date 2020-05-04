@@ -8,7 +8,7 @@ import com.lanzini.exception.SimulatorException;
 
 /**
  * Executor of the simulation
- * @param <T> - the type of the simulation
+ * @param <T> the type of the simulation
  */
 public class SimulatorExecutor<T> {
 
