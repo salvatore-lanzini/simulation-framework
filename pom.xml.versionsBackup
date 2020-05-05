@@ -6,7 +6,7 @@
 
     <groupId>com.github.salvatore-lanzini</groupId>
     <artifactId>simulation-framework</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>Java Simulation Framework</name>
     <description>Java Simulation Framework to help developers make simple stress tests</description>
