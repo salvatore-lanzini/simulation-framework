@@ -8,9 +8,31 @@
     <artifactId>simulation-framework</artifactId>
     <version>1.0.0</version>
 
-    <name>simulation-framework</name>
-    <description>Java Simulation Framework to make simple stress tests</description>
+    <name>Java Simulation Framework</name>
+    <description>Java Simulation Framework to help developers make simple stress tests</description>
     <url>https://github.com/salvatore-lanzini/simulation-framework</url>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL) version 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Salvatore Lanzini</name>
+            <email>salvatore.lanzini@gmail.com</email>
+            <organization>com.github.salvatore-lanzini</organization>
+            <organizationUrl>https://github.com/salvatore-lanzini/simulation-framework</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/salvatore-lanzini/simulation-framework.git</connection>
+        <developerConnection>scm:git:ssh://github.com:salvatore-lanzini/simulation-framework.git</developerConnection>
+        <url>https://github.com/salvatore-lanzini/simulation-framework</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
