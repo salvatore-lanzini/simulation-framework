@@ -4,13 +4,13 @@ Java Framework for Multi-Threading Test
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.salvatore-lanzini/simulation-framework/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.salvatore-lanzini/simulation-framework)
 
-##Description
-
+Description
+=======
 A collection of interfaces to make very easy write Multi-Threading and stress tests.
 When we have to test a component like WebService, KafkaConsumer, FtpReceiver, MqttSubscriber
-we are ever worry about how to write a significant stress tests in order to verify if our component
-do his job.
-With Simulation-Framework, write massives stress tests is very easy.
+we are worry about write a significant stress tests in order to verify if our components
+does their job.
+With Simulation-Framework, write massive stress tests is very easy.
 We have to worry only define a creator of the message (Factory of a simple java Pojo), the way when we want
 publish the message (a clientHttp, a producer Kafka, a Publisher Mqtt etc) and finally what is the
 configuration about test (number of threads, number of messages or time-duration, delay intra-message etc)
@@ -25,12 +25,12 @@ With framework we can make intensive stress test, writing really few lines of co
 
 Write less, do more!
 
-##Require
-
+Require
+=======
 Jdk 1.8 or +
 
-#Usage
-
+Usage
+=======
 Framework provides a concrete class in order to create a simulation flow very easy.
 SimulationFlowBuilder provides three methods to define the messageFactory (tipically random way), the publisher and
 the configurationExecutor of the simulation.
@@ -87,13 +87,14 @@ SimulatorFlowBuilder.flow()
                             postForEntity(webServiceTransactionUrl, request, Transaction.class);
                 })
                 .<Transaction>configure((messageFactory, publisher) ->
-                        new ConfigurationExecutorTemplate<String>().
+                        new ConfigurationExecutorTemplate<Transaction>().
                                 executeWithMessages(50,10, 5000,messageFactory,publisher))
                 .build()
                 .simulate();
 
 ```
 
-#License
+License
+======
 GNU General Public License v3.0: 
 [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html)
