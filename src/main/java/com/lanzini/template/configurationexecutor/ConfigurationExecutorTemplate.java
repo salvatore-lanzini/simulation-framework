@@ -1,4 +1,4 @@
-package com.lanzini.configurationexecutor;
+package com.lanzini.template.configurationexecutor;
 
 import com.lanzini.core.MessageFactory;
 import com.lanzini.core.Publisher;
@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Useful template for a configurationExecutor 'execute' method
- * @param <T> the type of the simulation
  */
-public class ConfigurationExecutorTemplate<T> {
-    Logger logger = LoggerFactory.getLogger(ConfigurationExecutorTemplate.class);
+public class ConfigurationExecutorTemplate {
+
+    private static final Logger logger = LoggerFactory.getLogger(ConfigurationExecutorTemplate.class);
 
     /**
      * Execute a multi-threading simulation with a number of threads, messages and delay intra messages
@@ -19,8 +19,9 @@ public class ConfigurationExecutorTemplate<T> {
      * @param delay delay intra messages
      * @param messageFactory messageFactory of simulation
      * @param publisher publisher of simulation
+     * @param <T> the type of the message
      */
-    public void executeWithMessages(int threads, int messages, long delay, MessageFactory<T> messageFactory, Publisher<T> publisher){
+    public static <T> void executeWithMessages(int threads, int messages, long delay, MessageFactory<T> messageFactory, Publisher<T> publisher){
         for(int i=0 ; i < messages ; i++) {
             executeMulthiThreadingExecution(threads, messageFactory, publisher);
             try {
@@ -39,8 +40,9 @@ public class ConfigurationExecutorTemplate<T> {
      * @param delay delay intra messages
      * @param messageFactory messageFactory of simulation
      * @param publisher publisher of simulation
+     * @param <T> the type of the message
      */
-    public void executeWithTimeRangeMinutes(int threads, int timeRangeMinutes, long delay, MessageFactory<T> messageFactory, Publisher<T> publisher){
+    public static <T> void executeWithTimeRangeMinutes(int threads, int timeRangeMinutes, long delay, MessageFactory<T> messageFactory, Publisher<T> publisher){
         long startTimestamp = System.currentTimeMillis();
         long timeRangeMinutesMillis = timeRangeMinutes * 60 * 1000;
         long timeLimit = startTimestamp + timeRangeMinutesMillis;
@@ -54,13 +56,7 @@ public class ConfigurationExecutorTemplate<T> {
         }while(System.currentTimeMillis() < timeLimit);
     }
 
-    /**
-     * Execute multi threading simulation
-     * @param threads number of threads
-     * @param messageFactory messageFactory of simulation
-     * @param publisher publisher of simulation
-     */
-    private void executeMulthiThreadingExecution(int threads, MessageFactory<T> messageFactory, Publisher<T> publisher){
+    private static <T> void executeMulthiThreadingExecution(int threads, MessageFactory<T> messageFactory, Publisher<T> publisher){
         for(int k = 0 ; k < threads ; k++) {
             Runnable runnable = () -> publisher.publish(messageFactory.createMessage());
             new Thread(runnable).start();

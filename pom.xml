@@ -6,7 +6,7 @@
 
     <groupId>com.github.salvatore-lanzini</groupId>
     <artifactId>simulation-framework</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <name>Java Simulation Framework</name>
     <description>Java Simulation Framework to help developers make simple stress tests</description>
@@ -132,6 +132,21 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>2.5.0</version>
         </dependency>
     </dependencies>
 
