@@ -1,6 +1,6 @@
-package com.lanzini.template.publisher.http;
+package com.lanzini.template.publisher;
 
-import com.google.gson.Gson;
+import com.lanzini.exception.HttpPublisherException;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 public class HttpPublisherTemplate {
 
     private static final CloseableHttpClient client = HttpClients.createDefault();
-    private static final Gson gson = new Gson();
 
     /**
      * Perform an Http GET Request
@@ -46,7 +45,7 @@ public class HttpPublisherTemplate {
     }
 
     /**
-     * Perform an Http POST Request
+     * Perform an Http POST Request with json body
      * @param url server url
      * @param body request body
      * @param <T> the type of the body
@@ -55,7 +54,38 @@ public class HttpPublisherTemplate {
      */
     public static <T> String post(String url, T body) throws HttpPublisherException{
         try {
+            return executePostOrPut(new HttpPost(url),Json.stringify(body));
+        }catch (Exception e){
+            throw new HttpPublisherException(e.getMessage());
+        }
+    }
+
+    /**
+     * Perform an Http POST Request
+     * @param url server url
+     * @param body request body
+     * @return response json body string
+     * @throws HttpPublisherException if something went wrong
+     */
+    public static String post(String url, String body) throws HttpPublisherException{
+        try {
             return executePostOrPut(new HttpPost(url),body);
+        }catch (Exception e){
+            throw new HttpPublisherException(e.getMessage());
+        }
+    }
+
+    /**
+     * Perform an Http PUT Request with json body
+     * @param url server url
+     * @param body request body
+     * @param <T> the type of the body
+     * @return response json body string
+     * @throws HttpPublisherException if something went wrong
+     */
+    public static <T> String put(String url, T body) throws HttpPublisherException{
+        try {
+            return executePostOrPut(new HttpPut(url),Json.stringify(body));
         }catch (Exception e){
             throw new HttpPublisherException(e.getMessage());
         }
@@ -65,11 +95,10 @@ public class HttpPublisherTemplate {
      * Perform an Http PUT Request
      * @param url server url
      * @param body request body
-     * @param <T> the type of the body
      * @return response json body string
      * @throws HttpPublisherException if something went wrong
      */
-    public static <T> String put(String url, T body) throws HttpPublisherException{
+    public static String put(String url, String body) throws HttpPublisherException{
         try {
             return executePostOrPut(new HttpPut(url),body);
         }catch (Exception e){
@@ -82,8 +111,8 @@ public class HttpPublisherTemplate {
         return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
     }
 
-    private static <T> String executePostOrPut(HttpEntityEnclosingRequestBase method, T body) throws IOException {
-        StringEntity entity = new StringEntity(gson.toJson(body));
+    private static String executePostOrPut(HttpEntityEnclosingRequestBase method, String body) throws IOException {
+        StringEntity entity = new StringEntity(body);
         method.setEntity(entity);
         method.setHeader("Accept", "application/json");
         method.setHeader("Content-type", "application/json");

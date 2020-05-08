@@ -1,11 +1,10 @@
-package com.lanzini.template.publisher.kafka;
+package com.lanzini.template.publisher;
 
-import com.google.gson.Gson;
+import com.lanzini.exception.KafkaPublisherException;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
-
 import java.util.Properties;
 import java.util.UUID;
 
@@ -14,10 +13,8 @@ import java.util.UUID;
  */
 public class KafkaPublisherTemplate {
 
-    private static final Gson gson = new Gson();
-
     /**
-     * Send a message with Apache Kafka Producer
+     * Send a json message with Apache Kafka Producer
      * @param brokers list of Apache Kafka Brokers
      * example with 1 broker "99.999.999.90:9092"
      * example with 3 brokers "99.999.999.90:9092;99.999.999.91:9092;99.999.999.92:9092;"
@@ -27,9 +24,22 @@ public class KafkaPublisherTemplate {
      * @throws KafkaPublisherException if something went wrong
      */
     public static <T> void send(String brokers, String topic, T message) throws KafkaPublisherException {
+        send(brokers,topic,Json.stringify(message));
+    }
+
+    /**
+     * Send a message with Apache Kafka Producer
+     * @param brokers list of Apache Kafka Brokers
+     * example with 1 broker "99.999.999.90:9092"
+     * example with 3 brokers "99.999.999.90:9092;99.999.999.91:9092;99.999.999.92:9092;"
+     * @param topic Apache Kafka topic to publish message
+     * @param message message to publish
+     * @throws KafkaPublisherException if something went wrong
+     */
+    public static void send(String brokers, String topic, String message) throws KafkaPublisherException {
         try {
             Producer<String, String> producer = createProducer(brokers);
-            producer.send(new ProducerRecord<>(topic, gson.toJson(message))).get();
+            producer.send(new ProducerRecord<>(topic, Json.stringify(message))).get();
             deleteProducer(producer);
         }catch(Exception e){
             throw new KafkaPublisherException(e.getMessage());
