@@ -13,6 +13,7 @@ public class FileSystemPublisherTemplate {
 
     /**
      * Write a json file on filesystem
+     *
      * @param path path to write the file
      *  example /home/test/file.json
      * @param message message to write
@@ -25,6 +26,7 @@ public class FileSystemPublisherTemplate {
 
     /**
      * Write a file on filesystem
+     *
      * @param path path to write the file
      * @param message message to write
      * @throws FileSystemPublisherException if something went wrong

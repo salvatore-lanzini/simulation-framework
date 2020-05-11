@@ -29,7 +29,6 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/salvatore-lanzini/simulation-framework.git</connection>
         <developerConnection>scm:git:ssh://github.com:salvatore-lanzini/simulation-framework.git</developerConnection>
         <url>https://github.com/salvatore-lanzini/simulation-framework</url>
     </scm>

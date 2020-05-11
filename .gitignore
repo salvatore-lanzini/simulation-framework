@@ -14,6 +14,10 @@ target/
 .springBeans
 .sts4-cache
 
+### MQTT ###
+*.lck
+Si-Frmwk-Mqtt-Id*/
+
 ### IntelliJ IDEA ###
 .idea
 *.iws

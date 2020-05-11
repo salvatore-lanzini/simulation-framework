@@ -18,6 +18,7 @@ public class HttpPublisherTemplate {
 
     /**
      * Perform an Http GET Request
+     *
      * @param url server url
      * @return response json body string
      * @throws HttpPublisherException if something went wrong
@@ -32,6 +33,7 @@ public class HttpPublisherTemplate {
 
     /**
      * Perform an Http DELETE Request
+     *
      * @param url server url
      * @return response json body string
      * @throws HttpPublisherException if something went wrong
@@ -46,6 +48,7 @@ public class HttpPublisherTemplate {
 
     /**
      * Perform an Http POST Request with json body
+     *
      * @param url server url
      * @param body request body
      * @param <T> the type of the body
@@ -62,6 +65,7 @@ public class HttpPublisherTemplate {
 
     /**
      * Perform an Http POST Request
+     *
      * @param url server url
      * @param body request body
      * @return response json body string
@@ -77,6 +81,7 @@ public class HttpPublisherTemplate {
 
     /**
      * Perform an Http PUT Request with json body
+     *
      * @param url server url
      * @param body request body
      * @param <T> the type of the body
@@ -93,6 +98,7 @@ public class HttpPublisherTemplate {
 
     /**
      * Perform an Http PUT Request
+     *
      * @param url server url
      * @param body request body
      * @return response json body string

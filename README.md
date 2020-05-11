@@ -40,7 +40,7 @@ In this way, develepor have to worry about only how to create the message and ho
 
 Example 1.1 - 5 Threads sends 5 messages each with 1 second delay intra-messages
 
-```java
+```
 SimulatorFlowBuilder.flow()
                 .message( ()-> new Long(System.currentTimeMillis()).toString() ) //define a messageFactory
                 .<String>publish( message -> System.out.println(message)) //define a messagePublisher
@@ -53,7 +53,7 @@ SimulatorFlowBuilder.flow()
    
 Example 1.2 - 5 Threads sends messages for 10 minutes with 1 second delay intra-messages
 
-```java
+```
 SimulatorFlowBuilder.flow()
                 .message( ()-> new Long(System.currentTimeMillis()).toString() ) 
                 .<String>publish( message -> System.out.println(message)) 
@@ -66,7 +66,7 @@ SimulatorFlowBuilder.flow()
 
 Example 2 - 50 Threads invokes a WebService, 10 times each wich 5 seconds delay each time
 
-```java
+```
 
 //using Spring RestTemplate for Http POST Request
 
@@ -93,6 +93,77 @@ SimulatorFlowBuilder.flow()
                 .simulate();
 
 ```
+
+Version 1.0.2
+======
+
+From version 1.0.2 framework provides so many templates to make more easy the way to publish messages.
+Framework provides five built-in PublisherTemplate for the most usage application protocol messaging:
+
+- HttpPublisherTemplate - for Http requests
+- KafkaPublisherTemplate - for Apache Kafka producers
+- MqttPublisherTemplate - for Mqtt publishers
+- FtpPublisherTemplate - for Ftp storing files
+- FileSystemPublisherTemplate - to create and store files on own filesystem
+
+Every Template provides static methods to send,publish,store, and save file.
+
+In order to make very easy to set-up a connection with Servers or broker, framework provides another
+Template, PublisherTemplateConnectionFactory, wich has got three static methods (mqtt,kafka,ftp) to
+connect stress tests to the servers.
+
+To set-up a connection is been added another method to SimulationFlowBuilder, connect, wich user
+can defines the type of connection to set-up.
+
+Example with Apache Kafka
+
+```
+SimulationFlowBuilder.flow()
+.message( ... )
+.connect( () -> PublisherTemplateConnectionFactory.ftp("localhost",21,"XXX","XXX") )
+.<String>publish(message -> {
+                    try {
+                        KafkaPublisherTemplate.send("test",message);
+                    } catch (KafkaPublisherException e) {
+                        e.printStackTrace();
+                    }
+                })
+```
+Note that we use in new FlowBuilder method, connect, the PublisherTemplateConnectionFactory
+to set-up connection to the Apache Kafka broker and into publish method the KafkaPublisherTemplate
+to send a message to a topic.
+
+With latest release we rewrite stress tests in Example 2 with HttpPublisherTemplate
+
+```
+
+SimulatorFlowBuilder.flow()
+                .message( ()-> {
+                    Transaction transaction = new Transaction();
+                    transaction.setTransactionId(UUID.randomUUID().toString());
+                    transaction.setAmount( ThreadLocalRandom.current().nextDouble(0.0, 10000.0) );
+                    return transaction;
+                } )
+                .<Transaction>publish( message -> HttpPublisherTemplate.post("http://localhost:8080/test",message))
+                .<Transaction>configure((messageFactory, publisher) ->
+                        new ConfigurationExecutorTemplate<Transaction>().
+                                executeWithMessages(50,10, 5000,messageFactory,publisher))
+                .build()
+                .simulate();
+
+```
+
+Or publish a message on a Mqtt topic
+
+```
+.connect( () -> PublisherTemplateConnectionFactory.mqtt("localhost",1883,"XXX","XXX") )
+                .<Transaction>publish( message -> {
+                    try {MqttPublisherTemplate.send(message,"TEST",0);
+                    } catch (MqttPublisherException e) { e.printStackTrace(); }
+                })
+```
+
+Write less! Do More!
 
 License
 ======

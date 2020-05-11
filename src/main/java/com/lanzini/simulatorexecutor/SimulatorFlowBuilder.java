@@ -2,6 +2,7 @@ package com.lanzini.simulatorexecutor;
 
 
 import com.lanzini.core.ConfigurationExecutor;
+import com.lanzini.core.ConnectionTemplate;
 import com.lanzini.core.MessageFactory;
 import com.lanzini.core.Publisher;
 
@@ -17,6 +18,7 @@ public class SimulatorFlowBuilder {
 
     /**
      * Get a new flow builder
+     *
      * @return a new instance of SimulationFlowBuilder
      */
     public static SimulatorFlowBuilder flow(){
@@ -25,6 +27,7 @@ public class SimulatorFlowBuilder {
 
     /**
      * Set the messageFactory of flow builder
+     *
      * @param messageFactory the messageFactory of flow builder
      * @param <T> the type of the message
      * @return the instance of flow builder
@@ -35,7 +38,19 @@ public class SimulatorFlowBuilder {
     }
 
     /**
+     * Set up a connectionTemplate
+     *
+     * @param connectionTemplate the connectionTemplate of flow builder
+     * @return the instance of flowbuilder
+     */
+    public SimulatorFlowBuilder connect(ConnectionTemplate connectionTemplate){
+        this.simulatorExecutor.setConnectionTemplate(connectionTemplate);
+        return this;
+    }
+
+    /**
      * Set the publisher of flow builder
+     *
      * @param publisher the publisher of flow builder
      * @param <T> the type of the simulation
      * @return the instance of flow builder
@@ -47,6 +62,7 @@ public class SimulatorFlowBuilder {
 
     /**
      * Set the configurationExecutor of flow builder
+     *
      * @param configurationExecutor the configurationExecutor of flow builder
      * @param <T> the type of the simulation
      * @return the instance of flow builder
@@ -58,6 +74,7 @@ public class SimulatorFlowBuilder {
 
     /**
      * get a new instance of simulatorExecutor
+     *
      * @return the simulatorExecutor
      */
     public SimulatorExecutor build(){
