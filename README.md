@@ -120,7 +120,7 @@ Example with Apache Kafka
 ```
 SimulationFlowBuilder.flow()
 .message( ... )
-.connect( () -> PublisherTemplateConnectionFactory.ftp("localhost",21,"XXX","XXX") )
+.connect( () -> PublisherTemplateConnectionFactory.kafka("localhost:9092") )
 .<String>publish(message -> {
                     try {
                         KafkaPublisherTemplate.send("test",message);
