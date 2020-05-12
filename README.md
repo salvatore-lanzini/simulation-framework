@@ -2,7 +2,7 @@ Simulation-Framework
 ======================
 Java Framework for Multi-Threading Test
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.salvatore-lanzini/simulation-framework/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.salvatore-lanzini/simulation-framework)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.salvatore-lanzini/simulation-framework.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.salvatore-lanzini%22%20AND%20a:%22simulation-framework%22)
 
 Description
 =======
